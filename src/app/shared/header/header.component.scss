@@ -17,5 +17,19 @@
   .mat-mdc-outlined-button:not(:disabled) {
     border-color: white;
   }
+
+  img {
+    cursor: pointer;
+  }
+
+  .btn {
+    width: 160px;
+  }
+
+  .elements {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
 }
 

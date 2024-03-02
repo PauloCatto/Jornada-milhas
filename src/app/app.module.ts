@@ -28,12 +28,21 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { BotaoControleComponent } from './shared/botao-controle/botao-controle.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PromocoesComponent } from './pages/home/promocoes/promocoes.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DropdownUfComponent } from './shared/form-busca/dropdown-uf/dropdown-uf.component';
 import { SeletorPassageiroComponent } from './shared/seletor-passageiro/seletor-passageiro.component';
 import { DepoimentosComponent } from './pages/home/depoimentos/depoimentos.component';
+import { FormBaseComponent } from './shared/form-base/form-base.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDividerModule  } from '@angular/material/divider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { LoginComponent } from './pages/login/login/login.component';
+import { CadastroComponent } from './pages/cadastro/cadastro.component';
+import { PerfilComponent } from './pages/perfil/perfil.component'
+import { AutenticacaoInterceptor } from './core/interceptors/autenticacao.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -52,7 +61,11 @@ import { DepoimentosComponent } from './pages/home/depoimentos/depoimentos.compo
     PromocoesComponent,
     DropdownUfComponent,
     SeletorPassageiroComponent,
-    DepoimentosComponent
+    DepoimentosComponent,
+    FormBaseComponent,
+    LoginComponent,
+    CadastroComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
@@ -71,9 +84,18 @@ import { DepoimentosComponent } from './pages/home/depoimentos/depoimentos.compo
     MatDialogModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatRadioModule,
+    MatDividerModule,
+    MatCheckboxModule,
     MatAutocompleteModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AutenticacaoInterceptor,
+    multi: true
+}],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
